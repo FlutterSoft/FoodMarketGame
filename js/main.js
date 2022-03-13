@@ -1,19 +1,20 @@
 // TODO
-// add some method of deleting fruit from inventory if 3 days have elapsed since purchase. Probably push to an array with the date, if array[0] date is more than 3 days from now date then shift off array
+
+// DONE - add some method of deleting fruit from inventory if 3 days have elapsed since purchase.   Probably push to an array with the date, if array[0] date is more than 3 days from now date then shift off array
 
 // add a start button that unhides everything
 
 const player = {
     name : 'Sam', // prompt('Enter your name')
-    money : 10,
+    money : 5,
     day : 1,
-    apple : 0,
-    orange : 0,
-    mango : 0,
+    apple : [],
+    orange : [],
+    mango : [],
 
     buyFruit : function(fruit){
         if (player.money >= fruit.price){
-            player[fruit.name]++
+            player[fruit.name].push(player.day)
             player.money -= fruit.price
             updateFruitOwned()
             moneySpan.innerText = player.money
@@ -26,8 +27,8 @@ const player = {
         }
     },
     sellFruit : function(fruit){
-        if (player[fruit.name] > 0){
-            player[fruit.name]--
+        if (player[fruit.name].length > 0){
+            player[fruit.name].shift()
             player.money += fruit.price
             updateFruitOwned()
             moneySpan.innerText = player.money
@@ -43,20 +44,18 @@ const player = {
 }
 
 // Fruit Objects
-let apple = {
+const apple = {
     name : 'apple',
     price : 1
 }
-let orange = {
+const orange = {
     name : 'orange',
     price : 2
 }
-let mango = {
+const mango = {
     name : 'mango',
     price : 4
 }
-
-
 
 
 // Setting DOM variables
@@ -117,9 +116,9 @@ sellMangoesButton.addEventListener('click', function(){
 
 
 function updateFruitOwned(){
-    applesOwnedSpan.innerText = ' ' + player.apple
-    orangesOwnedSpan.innerText = ' ' + player.orange
-    mangoesOwnedSpan.innerText = ' ' + player.mango
+    applesOwnedSpan.innerText = ' ' + player.apple.length
+    orangesOwnedSpan.innerText = ' ' + player.orange.length
+    mangoesOwnedSpan.innerText = ' ' + player.mango.length
 }
 
 
@@ -127,10 +126,18 @@ function updateFruitOwned(){
 function updatePrices(fruitArr){
     for (fruit of fruitArr){
         if(Math.random() > 0.5){
-            fruit.price += 1
+            if (fruit.price > 6){
+                fruit.price += 2
+            }
+            else {
+                fruit.price += 1
+            }
         }
         else {
-            if (fruit.price > 1)
+            if (fruit.price > 10){
+                fruit.price -=2
+            }
+            else if (fruit.price > 1)
             fruit.price -=1
         }
     }    
@@ -140,14 +147,18 @@ function updatePrices(fruitArr){
 }
 
 
-// checks time elapsed since game started and updates Day count
+// checks time elapsed since game started and updates Day count every 5 seconds
 function timeTracker() {
     let timeNow = new Date()
     let timeElapsed = Math.floor((timeNow.getTime() - startTime.getTime()) / 1000)
-    if (timeElapsed % 6 == 0){
+    if (timeElapsed % 5 == 0){
         player.day += 1
         daySpan.innerText = ' ' + player.day
         updatePrices([apple, orange, mango])
+        removeExpiredItems(apple)
+        removeExpiredItems(orange)
+        removeExpiredItems(mango)
+
     }
     if (player.day == 30){
         document.querySelector('body').classList.add('disable')
@@ -157,6 +168,16 @@ function timeTracker() {
 }
 let myInterval = setInterval(timeTracker, 1000)
 // end of time tracker
+
+// Removes any fruit that have been in inventory for 4 days. 
+function removeExpiredItems(fruit){
+    while ( (player[fruit.name][0] + 4) === player.day){
+        player[fruit.name].shift()
+        updateFruitOwned()
+        document.querySelector(`#${fruit.name}Expired`).innerText = ' -1'
+        setTimeout( () => {document.querySelector(`#${fruit.name}Expired`).innerText = ''},1300)
+    }
+}
 
 updateFruitOwned()
 
