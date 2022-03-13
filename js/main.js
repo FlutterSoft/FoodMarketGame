@@ -1,5 +1,7 @@
 // TODO
-// add some method of deleting fruit from inventory if 3 days have elapsed since purchase
+// add some method of deleting fruit from inventory if 3 days have elapsed since purchase. Probably push to an array with the date, if array[0] date is more than 3 days from now date then shift off array
+
+// add a start button that unhides everything
 
 const player = {
     name : 'Sam', // prompt('Enter your name')
