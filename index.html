@@ -2,53 +2,60 @@
 <html lang="en">
 	<head>
     	<meta charset="utf-8">
-    	<meta name="description" content="This is where your description goes">
-    	<meta name="keywords" content="one, two, three">
+    	<meta name="description" content="A little game where you buy and sell fruit.">
+    	<meta name="keywords" content="fruit, market, game">
 
-		<title>Title in the tab</title>
+		<title>Fruit Market Game</title>
 
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@400;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
-	<div class = 'container'>
-		<header>
-			<div id="divName">Name:<span id="name"></span> </div>
-			<div id="divMoney"> Money: $<span id="money"></span> </div>
-			<div id="divDay">Day:<span id="day"></span></div>
-		</header>
-		<div class="inner container">
-			<div>
-				<h2>Apples</h2>
-				<h3>Price:<span id="applePrice"></span></h3>
-				<h4>Owned:<span id="applesOwned"></span><span id="appleExpired"></span></h4>
-				<button id="btnBuyApples" class="btnBuy">Buy</button>
-				<button id="btnSellApples" class="btnSell">Sell</button>
-			</div>
-			<div>
-				<h2>Oranges</h2>
-				<h3>Price:<span id="orangePrice"></span></h3>
+		<div id="titleContainer">
+			<h1>Fruit Market Game</h1>
+				<p>How To Play: Buy low sell high! But be careful, fruit goes bad after 3 days! </p>
+		</div>
 
-				<h4>Owned:<span id="orangesOwned"></span> <span id="orangeExpired"></span>  </h4>
+		<div class = 'container'>
+			<header>
+				<!-- <div id="divName">Name:<span id="name"></span> </div> -->
+				<div id="divMoney"> Money: $<span id="money"></span> </div>
+				<div id="divDay">Day:<span id="day"></span></div>
+			</header>
+			<h2 id="notices"></h2>
+			<div class="inner container">
+				
+				<div>
+					<h2>Apples</h2>
+					<h3>Price:<span id="applePrice"></span></h3>
+					<h4>Owned:<span id="applesOwned"></span><span class="hide" id="appleExpired"> - </span></h4>
+					<button id="btnBuyApples" class="btnBuy">Buy</button>
+					<button id="btnSellApples" class="btnSell">Sell</button>
+				</div>
+				<div>
+					<h2>Oranges</h2>
+					<h3>Price:<span id="orangePrice"></span></h3>
 
-				<button id="btnBuyOranges" class="btnBuy">Buy</button>
-				<button id="btnSellOranges" class="btnSell">Sell</button>
-				<h2 id="notices"></h2>
-			</div>
-			<div>
-				<h2>Mangoes</h2>
-				<h3>Price:<span id="mangoPrice"></span></h3>
+					<h4>Owned:<span id="orangesOwned"></span> <span class="hide" id="orangeExpired">-</span>  </h4>
 
-				<h4>Owned:<span id="mangoesOwned"></span><span id="mangoExpired"></span></h4>
+					<button id="btnBuyOranges" class="btnBuy">Buy</button>
+					<button id="btnSellOranges" class="btnSell">Sell</button>
+				</div>
+				<div>
+					<h2>Mangoes</h2>
+					<h3>Price:<span id="mangoPrice"></span></h3>
 
-				<button id="btnBuyMangoes" class="btnBuy">Buy</button>
-				<button id="btnSellMangoes" class="btnSell">Sell</button>
+					<h4>Owned:<span id="mangoesOwned"></span><span  class="hide" id="mangoExpired"> - </span></h4>
 
-
+					<button id="btnBuyMangoes" class="btnBuy">Buy</button>
+					<button id="btnSellMangoes" class="btnSell">Sell</button>
+				</div>
 			</div>
 		</div>
-	</div>
 
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>

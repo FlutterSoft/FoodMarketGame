@@ -2,10 +2,9 @@
 
 // DONE - add some method of deleting fruit from inventory if 3 days have elapsed since purchase.   Probably push to an array with the date, if array[0] date is more than 3 days from now date then shift off array
 
-// add a start button that unhides everything
 
 const player = {
-    name : 'Sam', // prompt('Enter your name')
+    // name : prompt('Enter your name'), // 
     money : 5,
     day : 1,
     apple : [],
@@ -18,6 +17,9 @@ const player = {
             player.money -= fruit.price
             updateFruitOwned()
             moneySpan.innerText = player.money
+            moneySpan.classList.add('buy')
+            setTimeout( () => {moneySpan.classList.remove('buy')},800)
+            
         }
         else {
             notices.innerText = 'Not enough money.'
@@ -32,6 +34,8 @@ const player = {
             player.money += fruit.price
             updateFruitOwned()
             moneySpan.innerText = player.money
+            moneySpan.classList.add('sell')
+            setTimeout( () => {moneySpan.classList.remove('sell')},800)
         }
         else {
             notices.innerText = `You don't have a ${fruit.name} to sell.`
@@ -82,7 +86,7 @@ const notices = document.querySelector('#notices')
 const startTime = new Date()
 
 // Setting DOM elements
-nameSpan.innerText = ' ' + player.name
+// nameSpan.innerText = ' ' + player.name
 moneySpan.innerText = player.money
 daySpan.innerText = ' ' + player.day
 
@@ -120,6 +124,7 @@ function updateFruitOwned(){
     orangesOwnedSpan.innerText = ' ' + player.orange.length
     mangoesOwnedSpan.innerText = ' ' + player.mango.length
 }
+updateFruitOwned()
 
 
 // Update price of fruits
@@ -174,10 +179,9 @@ function removeExpiredItems(fruit){
     while ( (player[fruit.name][0] + 4) === player.day){
         player[fruit.name].shift()
         updateFruitOwned()
-        document.querySelector(`#${fruit.name}Expired`).innerText = ' -1'
-        setTimeout( () => {document.querySelector(`#${fruit.name}Expired`).innerText = ''},1300)
+        document.querySelector(`#${fruit.name}Expired`).classList.remove('hide')
+        setTimeout( () => {document.querySelector(`#${fruit.name}Expired`).classList.add('hide')},1300)
     }
 }
 
-updateFruitOwned()
 
